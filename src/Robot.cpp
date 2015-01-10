@@ -1,13 +1,20 @@
 #include "WPILib.h"
+#include "RobotParam.h"
+#include "CameraController.cpp"
 
 class Robot: public IterativeRobot
 {
 private:
+
 	LiveWindow *lw;
+
+	CameraController *ccontroller;
 
 	void RobotInit()
 	{
 		lw = LiveWindow::GetInstance();
+
+		ccontroller = new CameraController();
 	}
 
 	void AutonomousInit()
@@ -28,6 +35,7 @@ private:
 	void TeleopPeriodic()
 	{
 
+		ccontroller->update();
 	}
 
 	void TestPeriodic()
