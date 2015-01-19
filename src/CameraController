@@ -23,7 +23,7 @@ class CameraController {
 
 	int verticalTargets[0];
 
-
+ 
 public:
 	ColorImage frame;
 	AxisCamera *camera;
