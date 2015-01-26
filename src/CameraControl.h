@@ -4,7 +4,7 @@
 #include "WPILib.h"
 #include "Vision/RGBImage.h"
 #include "Vision/BinaryImage.h"
-#include "Math.h"
+#include "math.h"
 #include "LiveWindow/LiveWindow.h"
 
 
@@ -72,7 +72,7 @@ public:
 		int verticalTargets[MAX_PARTICLES];
 		int horizontalTargets[MAX_PARTICLES];
 		int verticalTargetCount, horizontalTargetCount;
-		Threshold threshold(105, 137, 230, 255, 133, 183);	//HSV threshold criteria, ranges are in that order ie. Hue is 60-100
+		Threshold threshold(MIN_H, MAX_H, MIN_S, MAX_S, MIN_V, MAX_V);	//HSV threshold criteria, ranges are in that order ie. Hue is 60-100
 		ParticleFilterCriteria2 criteria[] = {
 				{IMAQ_MT_AREA, AREA_MINIMUM, 65535, false, false}
 		};
@@ -99,18 +99,20 @@ public:
 		//Wait(1);
 		BinaryImage *filteredImage = thresholdImage->ParticleFilter(criteria, 1);	//Remove small particles
 		//filteredImage->Write("Filtered.bmp");
+
 		printf("Vision::Filtered Image");
 		//Wait(1);
 		std::vector<ParticleAnalysisReport> *reports = filteredImage->GetOrderedParticleAnalysisReports();  //get a particle analysis report for each particle
 		printf("Vision::AnRep");
+
 		//Wait(1);
 		verticalTargetCount = horizontalTargetCount = 0;
 		//Iterate through each particle, scoring it and determining whether it is a target or not
 		printf("Vision::RepSize");
 		//Wait(1);
+		SmartDashboard::PutNumber("ReportSize", reports->size());
 		if(reports->size() > 0)
 		{
-
 			//Wait(1);
 			scores = new Scores[reports->size()];
 			//Wait(1);
@@ -194,6 +196,7 @@ public:
 				ParticleAnalysisReport *distanceReport = &(reports->at(target.verticalIndex));
 				double distance = computeDistance(filteredImage, distanceReport);
 				SmartDashboard::PutBoolean("Hot", target.Hot);
+				SmartDashboard::PutNumber("Distance", distance);
 				/*if(target.Hot)
 				{
 
@@ -212,22 +215,20 @@ public:
 				}
 				*/
 			}
+
+			delete scores;
 		}
-		SmartDashboard::PutNumber("420", __LINE__);
 		printf("Vision::EndLoop");
 		//Wait(1);
-		SmartDashboard::PutNumber("420", __LINE__);
 		// be sure to delete images after using them
 		delete filteredImage;
 		delete thresholdImage;
 		delete image;
+
 		printf("Vision::Del1");
-		SmartDashboard::PutNumber("420", __LINE__);
 		//delete allocated reports and Scores objects also
-		delete scores;
 		printf("Vision::DScores");
 		//Wait(1)
-		SmartDashboard::PutNumber("420", __LINE__);
 		delete reports;
 		printf("Vision::EndCode");
 		//Wait(1);

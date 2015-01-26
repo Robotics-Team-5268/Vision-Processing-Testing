@@ -3,7 +3,6 @@
 #include "WPILib.h"
 #include "RobotBase.h"
 #include "RobotParameters.h"
-#include "SmartDashBoard\Smartdashboard.h"
 
 /* Uncomment as needed (make sure to update ports
 #define GATE_BUTTON 5 //LB top trigger
@@ -58,6 +57,14 @@
 
 // MAXIMUM NNUMBER OF PARTICLES TO PROCESS
 #define MAX_PARTICLES 8
+
+// THRESHHOLD VALUES
+#define MIN_H 137
+#define MAX_H 154
+#define MIN_S 36
+#define MAX_S 93
+#define MIN_V 232
+#define MAX_V 250
 
 //OTHER
 #define CAMERA_IP "10.52.68.11"

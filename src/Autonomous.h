@@ -4,7 +4,6 @@
 #include "WPILib.h"
 #include "RobotBase.h"
 #include "RobotParameters.h"
-#include "SmartDashBoard\Smartdashboard.h"
 
 class autonomous {
   //initiate robot drive
