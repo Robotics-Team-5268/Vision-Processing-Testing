@@ -3,9 +3,9 @@
 #include "WPILib.h"
 #include "RobotBase.h"
 #include "RobotParameters.h"
-#include "SmartDashBoard\Smartdashboard.h"
+//#include "SmartDashBoard\Smartdashboard.h"
 
-
+/* Uncomment as needed (make sure to update ports
 #define GATE_BUTTON 5 //LB top trigger
 #define GATE_SOLENOID_ONE 8
 #define GATE_SOLENOID_TWO 6
@@ -31,6 +31,10 @@
 #define FORWARD_LIGHT_SOL 3
 #define BACK_LIGHT_SOL 4
 #define GYRO_CHANNEL 1
+*/
+#define CAMERAMOTOR_LR 2 // Port 2 for the left right pivot motor for camera (I can haz left?)
+#define CAMERAMOTOR_UD 3 // Port 3 for the up down pivot motor for camera (I can haz up?)
+
 // camera constants used for distance calculation
 #define Y_IMAGE_RES 480 // x image reslolution in pixels, should be 120, 240 or 480
 #define VIEW_ANGLE 49 // axis mM1013
@@ -55,8 +59,16 @@
 // MAXIMUM NNUMBER OF PARTICLES TO PROCESS
 #define MAX_PARTICLES 8
 
+// THRESHHOLD VALUES
+#define MIN_H 137
+#define MAX_H 154
+#define MIN_S 36
+#define MAX_S 93
+#define MIN_V 232
+#define MAX_V 250
+
 //OTHER
-#define CAMERA_IP "192.168.0.90"
+#define CAMERA_IP "10.52.68.11"
 
 
 

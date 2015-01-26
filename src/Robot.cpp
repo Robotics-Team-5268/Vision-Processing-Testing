@@ -1,9 +1,9 @@
 #include "RobotBase.h"
 #include "WPILib.h"
 #include "RobotParameters.h"
-#include "SmartDashBoard\Smartdashboard.h"
+//#include "SmartDashBoard\Smartdashboard.h"
 #include "Autonomous.h"
-#include "CameraControl.cpp"
+#include "CameraControl.h"
 
 //TODO: see README.md
 
@@ -36,6 +36,7 @@ public:
 		m_right = new Talon(2);
 		myRobot = new RobotDrive(m_left, m_right);
 		myRobot->SetExpiration(0.1);
+		myRobot->SetSafetyEnabled(FALSE);
 
 
 		//Set update period to sync with robot control packets (20ms nominal)
@@ -78,7 +79,11 @@ public:
 			//m_gyro->Reset();
 		}
 
+		CameraControl camera;
 		void AutonomousPeriodic() {
+			SmartDashboard::PutString("Start", "1");
+			camera.update();
+
 			//old code
 			//m_autonomous->autonomousPeriodic();
 		}
@@ -89,7 +94,7 @@ public:
 		}
 
 		void TeleopPeriodic() {
-			myRobot->ArcadeDrive(stick); // drive with arcade style
+			//myRobot->ArcadeDrive(stick); // drive with arcade style
 
 			ccontrol.update();
 			//may need this, comment above if using this
